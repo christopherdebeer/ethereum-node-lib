@@ -17,11 +17,13 @@
     "email": "josephyzhou@gmail.com",
     "url": "https://github.com/josephyzhou"
   },
-  "contributors": [{
-    "name": "Martin Becze",
-    "email": "mjbecze@gmail.com",
-    "url": "https://github.com/wanderer"
-  }],
+  "contributors": [
+    {
+      "name": "Martin Becze",
+      "email": "mjbecze@gmail.com",
+      "url": "https://github.com/wanderer"
+    }
+  ],
   "scripts": {
     "test": "mocha --reporter spec ./test/"
   },
@@ -30,22 +32,16 @@
   },
   "dependencies": {
     "bignum": "=0.6.1",
-    "buffertools": ">=1.0.3",
-    "binary": ">=0.2.5 <0.3",
-    "winston": ">=0.2.6",
     "leveldown": ">=0.2.1",
     "levelup": "~0.18.2",
-    "path": "~0.4.9",
     "underscore": "~1.6.0",
-    "mkdirp": "~0.3.5",
     "rlp": "0.0.3",
     "async": "~0.2.10",
-    "minimist": "0.0.8",
-    "sha3": "~1.0.0"
+    "sha3": "~1.0.0",
+    "merkle-patricia-tree": "0.0.3"
   },
   "devDependencies": {
-    "mocha": ">=1.15.1",
-    "grunt-mocha-test": "~0.8.2"
+    "mocha": ">=1.15.1"
   },
   "licenses": "MIT"
 }
