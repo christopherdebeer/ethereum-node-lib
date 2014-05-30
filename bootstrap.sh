@@ -1,1 +1,0 @@
-docker -i lib/ -o docs/
