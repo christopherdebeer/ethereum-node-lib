@@ -23,7 +23,7 @@
     "url": "https://github.com/wanderer"
   }],
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --reporter spec ./test/"
   },
   "bin": {
     "ethereum": "./bin/ethereum.js"
@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "mocha": ">=1.15.1",
-    "docker": "~0.2.10"
+    "grunt-mocha-test": "~0.8.2"
   },
   "licenses": "MIT"
 }
