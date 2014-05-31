@@ -34,8 +34,6 @@ var Block = require('../lib/block.js'),
         []
     ];
 
-
-
 describe('[Block]: Basic functions', function () {
     var block;
     it('should parse a block', function () {

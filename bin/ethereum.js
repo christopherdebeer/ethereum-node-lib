@@ -11,7 +11,6 @@ var levelup = require('levelup');
 var db = levelup('./bin/blocksDB');
 
 internals.blockchain = new Blockchain(db);
-
 internals.network = new Network();
 
 internals.network.on('connecting', function (socket, port, host) {
