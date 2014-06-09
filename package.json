@@ -38,10 +38,13 @@
     "rlp": "0.0.3",
     "async": "~0.2.10",
     "sha3": "~1.0.0",
-    "merkle-patricia-tree": "0.0.3"
+    "merkle-patricia-tree": "0.0.3",
+    "bindings": "^1.2.0"
   },
   "devDependencies": {
-    "mocha": ">=1.15.1"
+    "mocha": ">=1.15.1",
+    "node-gyp": "^0.13.1"
   },
-  "licenses": "MIT"
+  "licenses": "MIT",
+  "gypfile": true
 }

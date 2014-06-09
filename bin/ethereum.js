@@ -26,7 +26,6 @@ internals.network.on('message.hello', function (hello) {
 });
 
 internals.network.on('message.transactions', function (transactions, peer) {
-    internals.transactions.concat(transactions);
     console.log(peer.internalId + ' got transactions');
     //TODO: check if transaction is in the DB
     //check if the transaction is valid
