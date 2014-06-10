@@ -8,7 +8,7 @@ var Ethereum = require('../'),
 
 
 var levelup = require('levelup');
-var db = levelup('./bin/blocksDB');
+var db = levelup('./testdb');
 
 internals.blockchain = new Blockchain(db);
 internals.network = new Network();
