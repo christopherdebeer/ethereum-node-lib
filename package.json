@@ -39,12 +39,11 @@
     "async": "~0.2.10",
     "sha3": "~1.0.0",
     "merkle-patricia-tree": "0.0.3",
-    "bindings": "^1.2.0",
-    "ecdsa": "^0.5.1"
+    "ecdsa": "^0.5.1",
+    "eckey": "^0.6.0"
   },
   "devDependencies": {
-    "mocha": ">=1.15.1",
-    "node-gyp": "^0.13.1"
+    "mocha": ">=1.15.1"
   },
   "licenses": "MIT",
   "gypfile": true
