@@ -9,7 +9,8 @@ Node library of core [Ethereum](http://Ethereum.org) functions
  - [Block Chain](https://github.com/wanderer/ethereum-node-lib/wiki/API-Blockchain)
  - [Transaction](https://github.com/wanderer/ethereum-node-lib/wiki/API-transaction)
  - [Network](https://github.com/wanderer/ethereum-node-lib/wiki/API-Network)
- - [VM]() TODO 
+ - [VM]() TODO
+ - [Account]() TODO
  - [Utils]()
 ####Install
 `npm install`
