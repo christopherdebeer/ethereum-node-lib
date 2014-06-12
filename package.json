@@ -1,27 +1,28 @@
 {
   "name": "ethereum",
   "version": "0.0.4",
-  "description": "A node implementation of Ethereum",
+  "description": "A node libary of Ethereum's core functions",
   "keywords": [
-    "Ethereum",
-    "world domination"
+    "Ethereum"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/josephyzhou/node-ethereum.git"
+    "url": "https://github.com/wanderer/ethereum-node-lib"
   },
-  "homepage": "https://github.com/josephyzhou/node-ethereum",
-  "bugs": "https://github.com/josephyzhou/node-ethereum/issues",
+  "homepage": "https://github.com/wanderer/ethereum-node-lib",
+  "bugs": "https://github.com/wanderer/ethereum-node-lib/issues"
   "author": {
     "name": "Joey Zhou",
     "email": "josephyzhou@gmail.com",
     "url": "https://github.com/josephyzhou"
   },
-  "contributors": [{
-    "name": "Martin Becze",
-    "email": "mjbecze@gmail.com",
-    "url": "https://github.com/wanderer"
-  }],
+  "contributors": [
+    {
+      "name": "Martin Becze",
+      "email": "mjbecze@gmail.com",
+      "url": "https://github.com/wanderer"
+    }
+  ],
   "scripts": {
     "test": "mocha --reporter spec ./test/"
   },
@@ -29,23 +30,18 @@
     "ethereum": "./bin/ethereum.js"
   },
   "dependencies": {
-    "bignum": "=0.6.1",
-    "buffertools": ">=1.0.3",
-    "binary": ">=0.2.5 <0.3",
-    "winston": ">=0.2.6",
     "leveldown": ">=0.2.1",
     "levelup": "~0.18.2",
-    "path": "~0.4.9",
     "underscore": "~1.6.0",
-    "mkdirp": "~0.3.5",
     "rlp": "0.0.3",
     "async": "~0.2.10",
-    "minimist": "0.0.8",
-    "sha3": "~1.0.0"
+    "sha3": "~1.0.0",
+    "merkle-patricia-tree": "0.0.3",
+    "ecdsa": "^0.5.1",
+    "eckey": "^0.6.0"
   },
   "devDependencies": {
-    "mocha": ">=1.15.1",
-    "grunt-mocha-test": "~0.8.2"
+    "mocha": ">=1.15.1"
   },
-  "licenses": "MIT"
+  "licenses": "MIT",
 }
