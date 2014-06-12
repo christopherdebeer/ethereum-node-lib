@@ -10,7 +10,7 @@
     "url": "https://github.com/wanderer/ethereum-node-lib"
   },
   "homepage": "https://github.com/wanderer/ethereum-node-lib",
-  "bugs": "https://github.com/wanderer/ethereum-node-lib/issues"
+  "bugs": "https://github.com/wanderer/ethereum-node-lib/issues",
   "author": {
     "name": "Joey Zhou",
     "email": "josephyzhou@gmail.com",
@@ -38,10 +38,11 @@
     "sha3": "~1.0.0",
     "merkle-patricia-tree": "0.0.3",
     "ecdsa": "^0.5.1",
-    "eckey": "^0.6.0"
+    "eckey": "^0.6.0",
+    "bigi": "^1.2.0"
   },
   "devDependencies": {
     "mocha": ">=1.15.1"
   },
-  "licenses": "MIT",
+  "licenses": "MIT"
 }
