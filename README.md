@@ -1,4 +1,4 @@
-node-ethereum
+ethereum-node-lib
 ===========
 [![Build Status](https://travis-ci.org/josephyzhou/node-ethereum.png?branch=master)](https://travis-ci.org/josephyzhou/node-ethereum)
 
@@ -12,6 +12,7 @@ Node library of core [Ethereum](http://Ethereum.org) functions
  - [VM]() TODO
  - [Account]() TODO
  - [Utils]()
+ 
 ####Install
 `npm install`
 
