@@ -39,7 +39,8 @@
     "merkle-patricia-tree": "0.0.3",
     "ecdsa": "^0.5.1",
     "eckey": "^0.6.0",
-    "bigi": "^1.2.0"
+    "bigi": "^1.2.0",
+    "ecurve": "^0.6.0"
   },
   "devDependencies": {
     "mocha": ">=1.15.1"
