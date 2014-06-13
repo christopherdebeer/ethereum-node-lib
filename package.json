@@ -30,8 +30,6 @@
     "ethereum": "./bin/ethereum.js"
   },
   "dependencies": {
-    "leveldown": ">=0.2.1",
-    "levelup": "~0.18.2",
     "underscore": "~1.6.0",
     "rlp": "0.0.3",
     "async": "~0.2.10",
