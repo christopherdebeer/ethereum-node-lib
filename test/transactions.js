@@ -18,14 +18,7 @@ describe("[Transaction]: Basic functions", function () {
             assert(t.v.toString("hex") === tx.raw[6]);
             assert(t.r.toString("hex") === tx.raw[7]);
             assert(t.s.toString("hex") === tx.raw[8]);
-
-            if (tx.type === "contract") {
-                assert(t.type === "contract");
-                assert(t.init.toString("hex") === tx.raw[5]);
-            } else {
-                assert(t.type === "message");
-                assert(t.data.toString("hex") === tx.raw[5]);
-            }
+            assert(t.data.toString("hex") === tx.raw[5]);
             transactions.push(t);
         });
         done();
