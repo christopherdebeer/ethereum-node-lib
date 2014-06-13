@@ -1,6 +1,6 @@
-ethereum-node-lib
+ethereum-node-lib 
 ===========
-[![Build Status](https://travis-ci.org/josephyzhou/node-ethereum.png?branch=master)](https://travis-ci.org/josephyzhou/node-ethereum)
+[![Build Status](https://travis-ci.org/wanderer/ethereum-node-lib.svg?branch=master)](https://travis-ci.org/wanderer/ethereum-node-lib)
 
 Node library of core [Ethereum](http://Ethereum.org) functions
 
