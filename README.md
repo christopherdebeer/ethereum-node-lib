@@ -14,9 +14,7 @@ Node library of core [Ethereum](http://Ethereum.org) functions
  - [Utils]()
  
 ####Install
-`git clone https://github.com/wanderer/ethereum-node-lib`   
-`cd ethereum-node-lib`   
-`npm install .`
+`npm install git+https://github.com/wanderer/ethereum-node-lib`
 
 ####Testing
 `npm test`
