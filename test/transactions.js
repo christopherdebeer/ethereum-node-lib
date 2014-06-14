@@ -25,7 +25,7 @@ describe("[Transaction]: Basic functions", function () {
     });
 
     it("should serialize", function (done) {
-        transactions.forEach(function (tx, i) {
+        transactions.forEach(function (tx) {
             assert.deepEqual(tx.serialize(), rlp.encode(tx.raw));
         });
         done();

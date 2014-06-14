@@ -1,5 +1,5 @@
 {
-  "name": "ethereum",
+  "name": "ethereum-lib",
   "version": "0.0.4",
   "description": "A node libary of Ethereum's core functions",
   "keywords": [
