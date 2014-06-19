@@ -13,7 +13,7 @@ var tx = new Transaction();
 tx.nonce = 0;
 tx.gasPrice = 100;
 tx.gasLimit = 1000;
-tx.to = 0;
+tx.to = "0000000000000000000000000000000000000000";
 tx.value = 0;
 tx.data = "7f4e616d65526567000000000000000000000000000000000000000000000000003057307f4e616d6552656700000000000000000000000000000000000000000000000000573360455760415160566000396000f20036602259604556330e0f600f5933ff33560f601e5960003356576000335700604158600035560f602b590033560f60365960003356573360003557600035335700";
 
@@ -25,7 +25,7 @@ tx.sign(privateKey);
 //it with needs to have a certain amount of wei in to. To see how much that this
 //account needs we can use the getTotalFee
 
-console.log("Total Amount of wei needed:" + tx.getTotalFee());
+console.log("Total Amount of wei needed:" + tx.getWeiNeeded());
 
 //if your wondering how that is caculated it is
 // data lenght in bytes * 5

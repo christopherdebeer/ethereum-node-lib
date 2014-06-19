@@ -5,7 +5,7 @@ var ECkey = require("eckey"),
     Transaction = require("../lib/transaction.js"),
     txFixtures = require("./fixtures/txs.json");
 
-describe("[Transaction]: Basic functions", function () {
+describe.only("[Transaction]: Basic functions", function () {
     var transactions = [];
     it("should decode transactions", function (done) {
         txFixtures.forEach(function (tx) {
