@@ -40,6 +40,6 @@ exports.init = function (stateDB, blockchain) {
         console.log("root: " + trie.root.toString("hex"));
         console.log("rlp: " + block.serialize().toString("hex"));
         console.log("hash: " + block.hash());
-        //blockchain.addBlock(block);
+        blockchain.addBlock(block);
     });
 };
