@@ -5,7 +5,7 @@ var internals = {},
     Network = Ethereum.Network;
 
 
-exports.init = function (blockchain) {
+exports.init = function (blockchain, state ) {
     console.log("starting networking");
     internals.network = new Network();
 
@@ -40,11 +40,11 @@ exports.init = function (blockchain) {
 
     internals.network.on("message.blocks", function (blocks, peer) {
         blocks.forEach(function (block) {
-            blockchain.addBlock(block, function (err) {
-                //probably couldn't find the block
-                if (err) {
-                    var incomingHeight = block.header.number;
-                    var height = blockchain.head.header.number;
+            //get the parent block
+            blockchain.getBlock(block.header.parentHash, function (err, parentBlock) {
+                if (!parentBlock) {
+                    var incomingHeight = block.header.number,
+                        height = blockchain.head.header.number;
 
                     if (incomingHeight > height) {
                         peer.sendGetChain(blockchain.hash(), incomingHeight - height);
@@ -53,6 +53,20 @@ exports.init = function (blockchain) {
                             peer.sendGetChain(foundBlocks, incomingHeight);
                         });
                     }
+                } else {
+                    //proccess the block and  update the world state
+                    state.processBlock(block, parentBlock.stateRoot, function (err) {
+                        if (!err) {
+                            blockchain.addBlock(block, function (err) {
+                                //probably couldn't find the block
+                                if (err) {
+                                    console.log("[blockchain] error: " + err);
+                                }
+                            });
+                        }else{
+                            console.log("[state] error " + err);
+                        }
+                    });
                 }
             });
 

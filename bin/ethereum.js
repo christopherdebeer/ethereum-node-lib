@@ -8,11 +8,13 @@ var Ethereum = require("../"),
 
 var internals = {},
     Blockchain = Ethereum.Blockchain,
+    State = Ethereum.State,
     stateDB = levelup("./db/state"),
     blockDB = levelup("./db/block"),
     detailsDB = levelup("./db/details");
 
 internals.blockchain = new Blockchain(blockDB, detailsDB);
+internals.state = new State(stateDB);
 
 internals.blockchain.load(function(){
     if (!internals.blockchain.head) {
@@ -20,6 +22,6 @@ internals.blockchain.load(function(){
         genesis.init(stateDB, internals.blockchain);
     }
 
-    networking.init(internals.blockchain);
+    networking.init(internals.blockchain, internals.state);
 });
 
