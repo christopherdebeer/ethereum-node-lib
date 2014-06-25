@@ -1,11 +1,12 @@
-var Ethereum = require("../"),
+var async = require("asyc"),
+    Ethereum = require("../"),
     genesis = require("./genesis");
 
 var internals = {},
     Network = Ethereum.Network;
 
 
-exports.init = function (blockchain, state ) {
+exports.init = function (blockchain, state) {
     console.log("starting networking");
     internals.network = new Network();
 
@@ -17,8 +18,22 @@ exports.init = function (blockchain, state ) {
         console.log("[networking]" + peer.internalId + " closing");
     });
 
-    internals.network.on("message.hello", function (hello) {
-        console.log("[networking]" + hello.ip + ":" + hello.port + " hello");
+    internals.network.on("message.hello", function (hello, peer) {
+        console.log("[networking] " + hello.ip + ":" + hello.port + " hello");
+        var more = true;
+        async.whilst(function () {
+            return more === true;
+        }, function (done) {
+            var hashes = blockchain.getBlockHashes(3, function () {
+                peer.sendGetChain(hashes, 30);
+                peer.one("message.blocks", function (blocks) {
+                    if (blocks.length !== 30) {
+                        more = false;
+                    }
+                    done();
+                });
+            });
+        });
     });
 
     internals.network.on("message.transactions", function (transactions, peer) {
@@ -63,7 +78,7 @@ exports.init = function (blockchain, state ) {
                                     console.log("[blockchain] error: " + err);
                                 }
                             });
-                        }else{
+                        } else {
                             console.log("[state] error " + err);
                         }
                     });
