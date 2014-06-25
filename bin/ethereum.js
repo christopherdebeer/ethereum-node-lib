@@ -21,7 +21,6 @@ internals.blockchain.load(function(){
         console.log("generating genesis block");
         genesis.init(stateDB, internals.blockchain);
     }
-
     networking.init(internals.blockchain, internals.state);
 });
 
