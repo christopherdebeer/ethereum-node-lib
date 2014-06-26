@@ -2,7 +2,7 @@ var Block = require("../lib/block.js"),
     blockFixtures = require("./fixtures/blocks.json"),
     assert = require("assert");
 
-describe("[Block]: Basic functions", function () {
+describe.only("[Block]: Basic functions", function () {
     var blocks = [];
     it("should parse a block", function () {
         blockFixtures.forEach(function (rawBlock) {
@@ -20,6 +20,12 @@ describe("[Block]: Basic functions", function () {
     it("should create a hash", function () {
         blocks.forEach(function (block, i) {
             assert(block.hash().toString("hex") === blockFixtures[i].hash);
+        });
+    });
+
+    it("should validate POW", function () {
+        blocks.forEach(function (block) {
+            assert(block.header.validatePOW());
         });
     });
 });

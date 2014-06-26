@@ -16,7 +16,7 @@ var internals = {},
 internals.blockchain = new Blockchain(blockDB, detailsDB);
 internals.state = new State(stateDB);
 
-internals.blockchain.load(function(){
+internals.blockchain.init(function(){
     if (!internals.blockchain.head) {
         console.log("generating genesis block");
         genesis.init(stateDB, internals.blockchain);

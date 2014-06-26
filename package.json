@@ -42,6 +42,7 @@
     "underscore": "~1.6.0"
   },
   "devDependencies": {
+    "memdown": "^0.10.2",
     "mocha": ">=1.15.1"
   },
   "licenses": "MIT"
