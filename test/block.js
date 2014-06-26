@@ -1,29 +1,31 @@
-var Block = require("../lib/block.js"),
-    blockFixtures = require("./fixtures/blocks.json"),
-    assert = require("assert");
+var Block = require('../lib/block.js'),
+    blockFixtures = require('./fixtures/blocks.json'),
+    assert = require('assert');
 
-describe.only("[Block]: Basic functions", function () {
+describe('[Block]: Basic functions', function () {
     var blocks = [];
-    it("should parse a block", function () {
+    it('should parse a block', function () {
         blockFixtures.forEach(function (rawBlock) {
             var block = new Block(rawBlock.block);
             blocks.push(block);
         });
     });
 
-    it("should serialize data", function () {
+    it('should serialize data', function () {
         blocks.forEach(function (block, i) {
-            assert(block.serialize().toString("hex") === blockFixtures[i].serialized);
+            assert(block.serialize().toString('hex') === blockFixtures[i].serialized);
         });
     });
 
-    it("should create a hash", function () {
+    it('should create a hash', function () {
         blocks.forEach(function (block, i) {
-            assert(block.hash().toString("hex") === blockFixtures[i].hash);
+            assert(block.hash().toString('hex') === blockFixtures[i].hash);
         });
     });
 
-    it("should validate POW", function () {
+    it('should validate POW', function () {
+        //the genesis block does not have a valid POW
+        blocks.splice(0, 1);
         blocks.forEach(function (block) {
             assert(block.header.validatePOW());
         });
