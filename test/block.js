@@ -1,14 +1,16 @@
 var Block = require('../lib/block.js'),
     blockFixtures = require('./fixtures/blocks.json'),
+    async = require('async'),
     assert = require('assert');
 
 describe('[Block]: Basic functions', function () {
     var blocks = [];
-    it('should parse a block', function () {
-        blockFixtures.forEach(function (rawBlock) {
+    it('should parse a block', function (done) {
+        async.eachSeries(blockFixtures, function (rawBlock, cb) {
             var block = new Block(rawBlock.block);
             blocks.push(block);
-        });
+            block.genTxTrie(cb);
+        }, done);
     });
 
     it('should serialize data', function () {

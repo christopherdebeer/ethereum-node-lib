@@ -36,7 +36,7 @@ describe('[Blockchain]: Basic functions', function () {
     it('should fetch hashes even when less hashes exist in the chain then asked for', function (done) {
         internals.blockchain.getBlockHashes(blockFixtures[1].hash, 9, function (errs, hashes) {
             console.log(hashes.length);
-            assert(hashes.length === 3);
+            assert(hashes.length === 4);
             assert(blockFixtures[2].hash === hashes[0]);
             assert(blockFixtures[3].hash === hashes[1]);
             done();
