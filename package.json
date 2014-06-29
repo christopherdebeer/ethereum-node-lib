@@ -36,7 +36,7 @@
     "ecdsa": "^0.5.1",
     "eckey": "^0.6.0",
     "ecurve": "^0.6.0",
-    "merkle-patricia-tree": "0.0.6",
+    "merkle-patricia-tree": "0.0.9",
     "rlp": "0.0.3",
     "sha3": "~1.0.0",
     "underscore": "~1.6.0"

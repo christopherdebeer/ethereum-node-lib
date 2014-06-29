@@ -45,6 +45,13 @@ describe('[Block]: Basic functions', function () {
         });
     });
 
+    it('should validate the transaction trie', function () {
+        //the genesis block does not have a valid POW
+        blocks.forEach(function (block) {
+            assert(block.validateTransactionsTrie());
+        });
+    });
+
     it('should validate the whole block', function () {
         //the genesis block does not have a valid POW; note we have no uncles
         //so we don't need the parnet's parent
