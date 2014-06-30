@@ -15,7 +15,7 @@ describe('[State]: Basic functions', function () {
         internals.state = new State(stateDB);
     });
 
-    it('should have correct genesis', function (done) {
+    it('should generate correct genesis state', function (done) {
         internals.state.generateGenesis(function () {
             var stateRoot = '11cc4aaa3b2f97cd6c858fcc0903b9b34b071e1798c91645f0e05e267028cb4a';
             assert(internals.state.trie.root.toString('hex') === stateRoot);
@@ -33,4 +33,17 @@ describe('[State]: Basic functions', function () {
             });
         }, done);
     });
+
+    // it('should dump state', function (done) {
+    //     var rlp = require('rlp');
+    //     var stream = internals.state.trie.createReadStream();
+
+    //     stream.on('data', function (data) {
+    //         console.log(data.key.toString('hex'));
+    //         console.log(rlp.decode(data.value));
+    //     });
+    //     stream.on('end', function () {
+    //         done();
+    //     });
+    // });
 });
