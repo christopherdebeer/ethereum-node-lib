@@ -69,6 +69,8 @@ exports.init = function (blockchain, state) {
                         });
                     }
                 } else {
+                    //validate block here -->
+
                     //proccess the block and  update the world state
                     state.processBlock(block, parentBlock.stateRoot, function (err) {
                         if (!err) {

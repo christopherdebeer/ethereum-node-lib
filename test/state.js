@@ -25,7 +25,6 @@ describe('[State]: Basic functions', function () {
 
     it('should process a blocks', function (done) {
         blockFixtures.splice(0, 1);
-        blockFixtures.splice(-1);
         async.eachSeries(blockFixtures, function (rawBlock, cb) {
             var block = new Block(rawBlock.block);
             internals.state.processBlock(block, function () {
