@@ -3,7 +3,7 @@ var async = require('async'),
     State = require('../lib/state.js'),
     assert = require('assert'),
     levelup = require('levelup'),
-    blockFixtures = require('./fixtures/blocks.json');
+    blockFixtures = require('./fixtures/blocks2.json');
 
 var internals = {},
     stateDB = levelup('', {
@@ -17,7 +17,7 @@ describe.only('[State]: Basic functions', function () {
 
     it('should generate correct genesis state', function (done) {
         internals.state.generateGenesis(function () {
-            var stateRoot = '11cc4aaa3b2f97cd6c858fcc0903b9b34b071e1798c91645f0e05e267028cb4a';
+            var stateRoot = '8dbd704eb38d1c2b73ee4788715ea5828a030650829703f077729b2b613dd206';
             assert(internals.state.trie.root.toString('hex') === stateRoot);
             done();
         });
