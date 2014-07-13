@@ -10,7 +10,7 @@ var internals = {},
         db: require('memdown')
     });
 
-describe('[State]: Basic functions', function () {
+describe.only('[State]: Basic functions', function () {
     it('should create a new state', function () {
         internals.state = new State(stateDB);
     });
