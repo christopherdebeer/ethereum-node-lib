@@ -46,20 +46,4 @@
     "5e9361ca27e14f3af0e6b28466406ad8be026d3b0f2ae56e3c064043fb73ec77",
     "29ae9893dac4f9afb1af743e25fbb6a63f7879a61437203cb48c997b0fcefc3a"
   ]
-}, {
-  "privateKey": "3dcac7b50dc278c8e4e020400ac94663138eddcf7f23869974f3c8ebd924bdef",
-  "sendersAddress": "72c6c2d924b81d5c2f8b8d82722d0d14d567ab86",
-  "type": "message",
-  "cost": 500,
-  "raw": [
-    "00",
-    "09184e72a000",
-    "01f4",
-    "f9231c62d4c53fcf67aa77ee9208d81a3ce2cd8f",
-    "0429d069189e0000", 
-    "00",
-    "1b",
-    "b0123048ff9666938500022d8f5f1e9c61541e0d93185d131d0b060d21b66464", 
-    "5c9401d979a1ea671d65092190c94ecb6247efc732713bebd25dacaadb8fb47f"
-  ]
 }]
