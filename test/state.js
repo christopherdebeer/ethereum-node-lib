@@ -10,7 +10,7 @@ var internals = {},
         db: require('memdown')
     });
 
-describe.only('[State]: Basic functions', function () {
+describe('[State]: Basic functions', function () {
     it('should create a new state', function () {
         internals.state = new State(stateDB);
     });
@@ -24,7 +24,6 @@ describe.only('[State]: Basic functions', function () {
     });
 
     it('should process a blocks', function (done) {
-        blockFixtures.splice(0, 1);
         async.eachSeries(blockFixtures, function (rawBlock, cb) {
             var block = new Block(rawBlock.block);
             internals.state.processBlock(block, function () {
