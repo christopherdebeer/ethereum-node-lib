@@ -22,11 +22,11 @@ exports.init = function (blockchain, state) {
 
   internals.network.on('message.hello', function (hello, peer) {
     console.log('[networking] ' + hello.ip + ':' + hello.port + ' hello');
-    internals.sync(peer, blockchain.head.hash(), function(err){
-      console.log('done syncing'); 
+    internals.sync(peer, blockchain.head.hash(), 30, function (err) {
+      console.log('done syncing');
     });
 
-   });
+  });
 
   internals.network.on('message.transactions', function (transactions, peer) {
     console.log('[networking]' + peer.internalId + ' got transactions');
@@ -81,6 +81,14 @@ exports.init = function (blockchain, state) {
 
 };
 
+/**
+ * Syncs blockchain with a peer
+ * @method sync
+ * @param {Object} peer
+ * @param {String} startHash - the block hash to start the sync from
+ * @param {Interger} count - the number of blocks to fetch per request
+ * @param {Function} cb - the callback
+ */
 internals.sync = function (peer, startHash, count, cb) {
   var more = true;
 
@@ -94,8 +102,8 @@ internals.sync = function (peer, startHash, count, cb) {
         if (msgType === 'blocks') {
           if (data.length !== count) {
             more = false;
+            peer.on('message.blocks', internals.onBlock);
           }
-          peer.on('message.blocks', internals.onBlocks);
 
           cb2();
         } else if (msgType === 'notInChain') {
@@ -126,28 +134,27 @@ internals.sync = function (peer, startHash, count, cb) {
   }, cb);
 };
 
+/**
+ * process a block and adds to the blockchain
+ * @method onBlock
+ */
 internals.onBlock = function (blocks) {
+  console.log('added block');
   blocks.forEach(function (block) {
-    //get the parent block
-    internals.blockchain.getBlock(block.header.parentHash, function (err, parentBlock) {
-      if (!parentBlock) {
-        console.log('unable to find the block parent\'s');
-      } else {
-        //validate block here -->
+    //TODO: get the parent block root state if parent is not head
+    //validate block here -->
 
-        //proccess the block and  update the world state
-        internals.state.processBlock(block, parentBlock.stateRoot, function (err) {
-          if (!err) {
-            internals.blockchain.addBlock(block, function (err) {
-              //probably couldn't find the block
-              if (err) {
-                console.log('[blockchain] error: ' + err);
-              }
-            });
-          } else {
-            console.log('[state] error ' + err);
+    //proccess the block and  update the world state
+    internals.state.processBlock(block, function (err) {
+      if (!err) {
+        internals.blockchain.addBlock(block, function (err) {
+          //probably couldn't find the block
+          if (err) {
+            console.log('[blockchain] error: ' + err);
           }
         });
+      } else {
+        console.log('[state] error ' + err);
       }
     });
   });
