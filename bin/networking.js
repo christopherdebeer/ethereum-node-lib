@@ -22,7 +22,7 @@ exports.init = function (blockchain, state) {
 
   internals.network.on('message.hello', function (hello, peer) {
     console.log('[networking] ' + hello.ip + ':' + hello.port + ' hello');
-    internals.sync(peer, blockchain.head.hash(), 30, function (err) {
+    internals.sync(peer, blockchain.head.hash(), function (err) {
       console.log('done syncing');
     });
 
@@ -46,9 +46,8 @@ exports.init = function (blockchain, state) {
   });
 
   internals.network.on('message.blocks', function (blocks, peer) {
-
-
     console.log('[networking]' + peer.internalId + ' got blocks');
+    internals.onBlock(blocks);
   });
 
   internals.network.on('message.getChain', function (message, peer) {
@@ -89,20 +88,25 @@ exports.init = function (blockchain, state) {
  * @param {Interger} count - the number of blocks to fetch per request
  * @param {Function} cb - the callback
  */
-internals.sync = function (peer, startHash, count, cb) {
-  var more = true;
+internals.sync = function (peer, startHash, cb) {
+  var more = true,
+    count = 30; //how mainly blocks to get.
 
-  async.whilst(function () {
-    return more === true;
-  }, function (cb2) {
-    internals.blockchain.getBlockHashes(startHash, -5, function (err, hashes) {
+  //get the first five hashes
+  internals.blockchain.getBlockHashes(startHash, -5, function (err, hashes) {
+    async.whilst(function () {
+      return more;
+    }, function (cb2) {
       //include the strating hash
-      hashes.push(startHash);
+      hashes.unshift(startHash);
       var onMessage = function (msgType, data) {
+        if (msgType === 'blocks' || msgType === 'notInChain') {
+          peer.removeListener('message', onMessage);
+        }
+
         if (msgType === 'blocks') {
           if (data.length !== count) {
             more = false;
-            peer.on('message.blocks', internals.onBlock);
           }
 
           cb2();
@@ -114,13 +118,9 @@ internals.sync = function (peer, startHash, count, cb) {
               peer.sendDisconnect(0x06, cb2);
             } else {
               //keep trying to synce. Start with the oldest hash
-              internals.sync(peer, hashes[0], count, cb2);
+              internals.sync(peer, hashes.pop(), cb2);
             }
           });
-        }
-
-        if (msgType === 'blocks' || msgType === 'notInChain') {
-          peer.removeListener('message', onMessage);
         }
       };
 
@@ -130,8 +130,8 @@ internals.sync = function (peer, startHash, count, cb) {
         peer.on('message', onMessage);
         peer.sendGetChain(hashes, count);
       }
-    });
-  }, cb);
+    }, cb);
+  });
 };
 
 /**

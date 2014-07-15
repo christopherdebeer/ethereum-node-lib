@@ -30,11 +30,17 @@ if (argv.help) {
       networking.init(internals.blockchain, internals.state);
     } else {
       var hash = internals.blockchain.genesisHash;
+      //get 30 blocks
+      console.log(internals.blockchain.head.header.number);
+
       internals.blockchain.getBlockChain([hash], 30, function (err, results) {
-        results = results.map(function(b){
-          return b.serialize(false);
+        internals.blockchain.getBlock(hash, function (err, genesis) {
+          results.unshift(genesis);
+          results = results.map(function (b) {
+            return b.serialize(false);
+          });
+          console.log(Utils.bufferToJSON(results));
         });
-        console.log(Utils.bufferToJSON(results));
       });
     }
   });
