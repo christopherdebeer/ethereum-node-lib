@@ -12,7 +12,7 @@ var blockDB = levelup('', {
   }),
   internals = {};
 
-describe.only('[Blockchain]: Basic functions', function () {
+describe('[Blockchain]: Basic functions', function () {
   it('should create a new block chain', function (done) {
     internals.blockchain = new Blockchain(blockDB, detailsDB);
     internals.blockchain.init(done);
