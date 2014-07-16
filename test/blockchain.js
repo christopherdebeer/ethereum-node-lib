@@ -12,7 +12,7 @@ var blockDB = levelup('', {
   }),
   internals = {};
 
-describe('[Blockchain]: Basic functions', function () {
+describe.only('[Blockchain]: Basic functions', function () {
   it('should create a new block chain', function (done) {
     internals.blockchain = new Blockchain(blockDB, detailsDB);
     internals.blockchain.init(done);
@@ -21,8 +21,8 @@ describe('[Blockchain]: Basic functions', function () {
   it('should add blocks', function (done) {
     async.eachSeries(blockFixtures, function (rawBlock, callback) {
       internals.blockchain.addBlock(rawBlock.block, callback);
-    },done);
-    
+    }, done);
+
   });
 
   it('should have added the head correctly', function () {
@@ -31,6 +31,11 @@ describe('[Blockchain]: Basic functions', function () {
 
   it('should have added the genesis correctly', function () {
     assert(internals.blockchain.meta.genesis === blockFixtures[0].hash);
+  });
+
+  it('should have added the correct height', function () {
+    console.log(internals.blockchain.meta.height);
+    assert(internals.blockchain.meta.height === blockFixtures.length - 1);
   });
 
   it('should fetch hashes from the chain', function (done) {
@@ -66,6 +71,15 @@ describe('[Blockchain]: Basic functions', function () {
       assert(blockFixtures[3].hash === hashes[0]);
       assert(blockFixtures[2].hash === hashes[1]);
       done();
+    });
+  });
+
+  it('should retrieve all the blocks in order from newest to oldest', function (done) {
+    internals.blockchain.getBlockChain(blockFixtures[0].hash, blockFixtures.length, function (err, results) {
+      assert(results.length === blockFixtures.length -1, 'should have correct number of blocks');
+      assert(results[0].hash().toString('hex') === blockFixtures[blockFixtures.length - 1].hash, 'newest should be first');
+      assert(results[results.length - 1].hash().toString('hex') === blockFixtures[1].hash, 'oldest should be last');
+      done(err);
     });
   });
 

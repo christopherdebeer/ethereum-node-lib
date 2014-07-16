@@ -29,13 +29,13 @@ if (argv.help) {
     if (!argv.dumpbc) {
       networking.init(internals.blockchain, internals.state);
     } else {
-      var hash = internals.blockchain.genesisHash;
-      //get 30 blocks
-      console.log(internals.blockchain.head.header.number);
+      var hash = internals.blockchain.meta.genesis,
+        height = internals.blockchain.meta.height;
 
-      internals.blockchain.getBlockChain([hash], 30, function (err, results) {
+      internals.blockchain.getBlockChain([hash], height , function (err, results) {
+        //add the genesis block to the end of the results
         internals.blockchain.getBlock(hash, function (err, genesis) {
-          results.unshift(genesis);
+          results.push(genesis);
           results = results.map(function (b) {
             return b.serialize(false);
           });
