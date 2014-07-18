@@ -2,6 +2,7 @@ var ECkey = require('eckey'),
     assert = require('assert'),
     rlp = require('rlp'),
     utils = require('../lib/utils.js'),
+    bignum = require('bignum'),
     Transaction = require('../lib/transaction.js'),
     txFixtures = require('./fixtures/txs.json');
 
@@ -33,7 +34,7 @@ describe('[Transaction]: Basic functions', function () {
 
     it('should correctly calcuate the upfront fee', function (done) {
         transactions.forEach(function (tx, i) {
-            assert(tx.getBaseFee() === txFixtures[i].cost);
+            assert(tx.getBaseFee().eq(txFixtures[i].cost));
         });
         done();
     });

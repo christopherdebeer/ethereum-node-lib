@@ -3,7 +3,7 @@ var async = require('async'),
     genesis = require('./genesis');
 
 var internals = {},
-    Network = Ethereum.Network;
+    Network = Ethereum.Network,
     Utils = Ethereum.Utils;
 
 
@@ -141,16 +141,18 @@ internals.sync = function (peer, startHash, cb) {
  */
 internals.onBlock = function (blocks) {
     console.log('added block');
-    blocks.forEach(function (block) {
+    async.eachSeries(blocks, function (block, cb) {
         //TODO: get the parent block root state if parent is not head
         //validate block here -->
         //proccess the block and  update the world state
+        
         internals.state.processBlock(block, function (err) {
             if (!err) {
                 internals.blockchain.addBlock(block, function (err) {
                     //probably couldn't find the block
                     if (err) {
                         console.log('[blockchain] error: ' + err);
+                        cb();
                     }
                 });
             } else {
