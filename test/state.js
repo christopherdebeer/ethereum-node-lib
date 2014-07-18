@@ -26,9 +26,9 @@ describe('[State]: Basic functions', function () {
     it('should process a blocks', function (done) {
         async.eachSeries(blockFixtures, function (rawBlock, cb) {
             var block = new Block(rawBlock.block);
-            internals.state.processBlock(block, function () {
+            internals.state.processBlock(block, function (err) {
                 assert(internals.state.trie.root.toString('hex') === block.header.stateRoot.toString('hex'));
-                cb();
+                cb(err);
             });
         }, done);
     });
