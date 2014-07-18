@@ -140,23 +140,24 @@ internals.sync = function (peer, startHash, cb) {
  * @method onBlock
  */
 internals.onBlock = function (blocks) {
-    console.log('added block');
+    blocks.reverse();
     async.eachSeries(blocks, function (block, cb) {
         //TODO: get the parent block root state if parent is not head
         //validate block here -->
         //proccess the block and  update the world state
-        
-        internals.state.processBlock(block, function (err) {
+        console.log('adding block:' + block.hash().toString('hex'));
+        internals.state.processBlock(block, internals.blockchain.head.header.stateRoot ,function (err) {
             if (!err) {
                 internals.blockchain.addBlock(block, function (err) {
                     //probably couldn't find the block
                     if (err) {
                         console.log('[blockchain] error: ' + err);
-                        cb();
                     }
+                    cb(err);
                 });
             } else {
                 console.log('[state] error ' + err);
+                cb(err);
             }
         });
     });
