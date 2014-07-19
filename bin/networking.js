@@ -145,20 +145,22 @@ internals.onBlock = function (blocks) {
         //TODO: get the parent block root state if parent is not head
         //validate block here -->
         //proccess the block and  update the world state
-        console.log('adding block:' + block.hash().toString('hex'));
-        internals.state.processBlock(block, internals.blockchain.head.header.stateRoot ,function (err) {
-            if (!err) {
-                internals.blockchain.addBlock(block, function (err) {
-                    //probably couldn't find the block
-                    if (err) {
-                        console.log('[blockchain] error: ' + err);
-                    }
-                    cb(err);
-                });
-            } else {
-                console.log('[state] error ' + err);
-                cb(err);
-            }
+        console.log('adding block: ' + block.hash().toString('hex'));
+        async.series([
+            async.apply(block.genTxTrie.bind(block)),
+            function (cb2) {
+                if (block.validate(internals.blockchain.head)) {
+                    internals.state.processBlock(block, internals.blockchain.head.header.stateRoot, cb2);
+                } else {
+                    cb2('invalid block');
+                }
+            },
+            async.apply(internals.blockchain.addBlock.bind(internals.blockchain), block)
+        ], function(err){
+            if(err){
+                console.log('error processing block: ' + err); 
+            } 
+            cb(err);
         });
     });
 };
