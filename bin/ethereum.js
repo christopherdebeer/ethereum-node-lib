@@ -25,6 +25,8 @@ if (argv.help) {
         if (!internals.blockchain.head) {
             console.log('generating genesis block');
             genesis.init(stateDB, internals.blockchain);
+        }else{
+            console.log("current state is:" + internals.blockchain.head.header.stateRoot.toString('hex'));
         }
         if (!argv.dumpbc) {
             networking.init(internals.blockchain, internals.state);
