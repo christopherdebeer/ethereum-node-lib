@@ -61,6 +61,7 @@ exports.init = function (blockchain, state) {
     });
 
     internals.network.on('message.getTransactions', function (message, peer) {
+        console.log(Utils.bufferToJSON(message.raw));
         console.log('[networking]' + peer.internalId + ' got request for transactions');
     });
 
@@ -150,6 +151,8 @@ internals.onBlock = function (blocks) {
             async.apply(block.genTxTrie.bind(block)),
             function (cb2) {
                 if (block.validate(internals.blockchain.head)) {
+                    var tx1 = block.transactionReceipts[0].transaction.raw; 
+                    console.log(Utils.bufferToJSON(tx1));
                     internals.state.processBlock(block, internals.blockchain.head.header.stateRoot, cb2);
                 } else {
                     cb2('invalid block');
