@@ -41,7 +41,7 @@ describe('[VM]: Basic functions', function () {
         var test = vmTests.memoryTest;
         var account = new Account(test.fromAccount);
         var tx = new Tx(test.tx);
-        assert(VM.generateAddress(tx, account.nonce) === test.newAddress);
+        assert(VM.generateAddress(tx.getSenderAddress(), account.nonce) === test.newAddress);
         done();
     });
 
