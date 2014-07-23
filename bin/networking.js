@@ -147,6 +147,9 @@ internals.onBlock = function (blocks) {
         //validate block here -->
         //proccess the block and  update the world state
         console.log('adding block: ' + block.hash().toString('hex'));
+        if (block.transactionReceipts[0]) {
+            console.log('tx: ' + Utils.bufferToJSON(block.transactionReceipts[0].transaction.raw));
+        }
         async.series([
             async.apply(block.genTxTrie.bind(block)),
             function (cb2) {
@@ -157,10 +160,10 @@ internals.onBlock = function (blocks) {
                 }
             },
             async.apply(internals.blockchain.addBlock.bind(internals.blockchain), block)
-        ], function(err){
-            if(err){
-                console.log('error processing block: ' + err); 
-            } 
+        ], function (err) {
+            if (err) {
+                console.log('error processing block: ' + err);
+            }
             cb(err);
         });
     });
