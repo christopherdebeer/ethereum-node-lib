@@ -11,20 +11,20 @@
   },
   "homepage": "https://github.com/wanderer/ethereum-node-lib",
   "bugs": "https://github.com/wanderer/ethereum-node-lib/issues",
-  "author": {
-    "name": "Joey Zhou",
-    "email": "josephyzhou@gmail.com",
-    "url": "https://github.com/josephyzhou"
-  },
-  "contributors": [
+  "author": [
     {
       "name": "Martin Becze",
       "email": "mjbecze@gmail.com",
       "url": "https://github.com/wanderer"
     }
   ],
+  "contributors": {
+    "name": "Joey Zhou",
+    "email": "josephyzhou@gmail.com",
+    "url": "https://github.com/josephyzhou"
+  },
   "scripts": {
-    "test": "mocha --reporter spec ./test/"
+    "test": "mocha --timeout 5000 --reporter spec ./test/"
   },
   "bin": {
     "ethereum": "./bin/ethereum.js"
